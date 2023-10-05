@@ -11,7 +11,7 @@ resource "null_resource" "app" {
 
   provisioner "remote-exec" {
     inline = [
-        echo hai
+        "echo hai"
     ]
   }
 }
