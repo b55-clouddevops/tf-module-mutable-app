@@ -26,7 +26,7 @@ resource "aws_instance" "od" {
 resource "aws_ec2_tag" "app_tags" {
   count         = var.OD_INSTANCE_COUNT + var.SPOT_INSTANCE_COUNT
 
-  resource_id   = concat(aws_instance.od.*.id , aws_spot_instance_request.spot.*.spot_instance_id)
+  resource_id   = concat(aws_spot_instance_request.spot.*.spot_instance_id, aws_instance.od.*.id)
   key           = "Name"
   value         = "${var.COMPONENT}-${var.ENV}"
 }
