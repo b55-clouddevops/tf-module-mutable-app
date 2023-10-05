@@ -22,6 +22,7 @@ resource "aws_instance" "od" {
   subnet_id                     = element(data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS, count.index)
 }
 
+
 # Creates EC2 TAGS and attahces to the SERVER
 resource "aws_ec2_tag" "app_tags" {
   count                         = local.INSTANCE_COUNT
