@@ -24,11 +24,11 @@ resource "aws_instance" "od" {
 
 # Creates EC2 TAGS and attahces to the SERVER
 resource "aws_ec2_tag" "app_tags" {
-  count         = var.OD_INSTANCE_COUNT + var.SPOT_INSTANCE_COUNT
+  count                         = local.INSTANCE_COUNT
 
-  resource_id   = concat(aws_spot_instance_request.spot.*.spot_instance_id, aws_instance.od.*.id)
-  key           = "Name"
-  value         = "${var.COMPONENT}-${var.ENV}"
+  resource_id                   = element(local.INSTANCE_IDS, count.index)
+  key                           = "Name"
+  value                         = "${var.COMPONENT}-${var.ENV}"
 }
 
 # If this is called by frontend component, then these instances has to be created in the PUBLIC SUBNET. If not, they are supposed to be created on PRIVATE SUBNET.
