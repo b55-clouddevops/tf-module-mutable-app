@@ -12,7 +12,7 @@ resource "aws_spot_instance_request" "spot" {
 }
 
 # Creates OD Instance 
-resource "aws_instance" "web" {
+resource "aws_instance" "od" {
   count             = var.OD_INSTANCE_COUNT
   ami               = data.aws_ami.ami.image_id
   instance_type     = var.OD_INSTANCE_TYPE
