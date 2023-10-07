@@ -16,7 +16,7 @@ resource "aws_lb_listener" "private" {
 resource "aws_lb_listener_rule" "app_rule" {
   count             = var.INTERNAL ? 1 : 0
 
-  listener_arn      = aws_lb_listener.private.arn
+  listener_arn      = aws_lb_listener.private.*.arn[0]
   priority          = 99
 
   action {
