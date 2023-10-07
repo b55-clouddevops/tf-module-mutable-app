@@ -1,9 +1,19 @@
-# Reads the information from the remote statefile
+# Reads the information from the remote VPC statefile
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
     bucket = "b55-terraform-state"
     key    = "vpc/${var.ENV}/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+# Reads the information from the remote ALB Statefile
+data "terraform_remote_state" "alb" {
+  backend = "s3"
+  config = {
+    bucket = "b55-terraform-state"
+    key    = "alb/${var.ENV}/terraform.tfstate"
     region = "us-east-1"
   }
 }
