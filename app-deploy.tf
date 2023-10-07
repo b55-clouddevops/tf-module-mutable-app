@@ -2,13 +2,12 @@
 resource "null_resource" "app" {
   count               = local.INSTANCE_COUNT
 
-  connection {
-    user     = local.SSH_USERNAME
-    password = local.SSH_PASSWORD
-    host     = element(local.INSTANCE_PRIVATE_IPS, count.index)
-  }
-
   provisioner "remote-exec" {
+    connection {
+      user     = local.SSH_USERNAME
+      password = local.SSH_PASSWORD
+      host     = element(local.INSTANCE_PRIVATE_IPS, count.index)
+    }
     inline = [
         "ansible-pull -U https://github.com/b55-clouddevops/ansible.git -e ENV=dev -e COMPONENT=${var.COMPONENT} roboshop-pull.yml"
     ]
