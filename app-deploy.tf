@@ -11,7 +11,7 @@ resource "null_resource" "app" {
 
   provisioner "remote-exec" {
     inline = [
-        "echo hai"
+        "ansible-pull -U https://github.com/b55-clouddevops/ansible.git -e ENV=dev -e COMPONENT=${var.COMPONENT} roboshop-pull.yml"
     ]
   }
 }
