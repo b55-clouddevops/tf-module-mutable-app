@@ -1,5 +1,10 @@
 # Installing the applicaiton
 resource "null_resource" "app" {
+
+  triggers = {
+    always_run = "${timestamp()}"                      # This ensure your provisoner would be execuring all the time,
+  }
+
   count               = local.INSTANCE_COUNT
 
   provisioner "remote-exec" {
