@@ -1,6 +1,4 @@
 
-
-
 # Generates a Random Number in the given range 
 resource "random_integer" "priority" {
   min = 100
