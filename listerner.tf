@@ -12,12 +12,19 @@ resource "aws_lb_listener" "private" {
   }
 }
 
+
+# Generates a Random Number in the given range 
+resource "random_integer" "priority" {
+  min = 100
+  max = 500
+}
+
 #  Creates a rule in the private loadBalancer listener
 resource "aws_lb_listener_rule" "app_rule" {
   count             = var.INTERNAL ? 1 : 0
 
   listener_arn      = aws_lb_listener.private.*.arn[0]
-  priority          = 99
+  priority          = random_integer.priority.result
 
   action {
     type             = "forward"
