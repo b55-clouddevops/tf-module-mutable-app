@@ -19,7 +19,7 @@ data "terraform_remote_state" "alb" {
 }
 
 # Reads the information from the remote DB Statefile
-data "terraform_remote_state" "db_subnet_group_name" {
+data "terraform_remote_state" "db" {
   backend = "s3"
   config = {
     bucket = "b55-terraform-state"
