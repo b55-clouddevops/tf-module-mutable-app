@@ -18,6 +18,16 @@ data "terraform_remote_state" "alb" {
   }
 }
 
+# Reads the information from the remote DB Statefile
+data "terraform_remote_state" "db_subnet_group_name" {
+  backend = "s3"
+  config = {
+    bucket = "b55-terraform-state"
+    key    = "databases/${var.ENV}/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
 # fetches the information of the secret
 data "aws_secretsmanager_secret" "secrets" {
   name = "robot/secrets"
