@@ -34,4 +34,13 @@ resource "aws_ec2_tag" "app_tags" {
   value                         = "${var.COMPONENT}-${var.ENV}"
 }
 
+resource "aws_ec2_tag" "monitoring_tags" {
+  count                         = local.INSTANCE_COUNT
+
+  resource_id                   = element(local.INSTANCE_IDS, count.index)
+  key                           = "monitor"
+  value                         = "yes"
+}
+
+
 # If this is called by frontend component, then these instances has to be created in the PUBLIC SUBNET. If not, they are supposed to be created on PRIVATE SUBNET.
